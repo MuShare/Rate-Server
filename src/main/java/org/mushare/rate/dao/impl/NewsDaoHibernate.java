@@ -5,6 +5,8 @@ import org.mushare.rate.dao.NewsDao;
 import org.mushare.rate.domain.News;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class NewsDaoHibernate extends PageHibernateDaoSupport<News> implements NewsDao {
 
@@ -13,4 +15,9 @@ public class NewsDaoHibernate extends PageHibernateDaoSupport<News> implements N
         setClass(News.class);
     }
 
+    public List<News> findByKeyword(String keyword) {
+        String hql = "from News where title like ? or content like ? order by pubDate desc";
+        String search = "%" + keyword + "%";
+        return (List<News>) getHibernateTemplate().find(hql, search, search);
+    }
 }

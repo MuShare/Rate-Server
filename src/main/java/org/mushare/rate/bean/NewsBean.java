@@ -1,32 +1,14 @@
-package org.mushare.rate.domain;
+package org.mushare.rate.bean;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.mushare.rate.domain.News;
 
-import javax.persistence.*;
-import java.io.Serializable;
+public class NewsBean {
 
-@Entity
-@Table(name = "rate_news")
-public class News implements Serializable {
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
     private String nid;
-
-    @Column(nullable = false)
     private String title;
-
-    @Column
     private String source;
-
-    @Column(nullable = false)
-    private Long pubDate;
-
-    @Column
+    private long pubDate;
     private String link;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     public String getNid() {
@@ -75,6 +57,15 @@ public class News implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public NewsBean(News news) {
+        this.nid = news.getNid();
+        this.title = news.getTitle();
+        this.source = news.getSource();
+        this.pubDate = news.getPubDate();
+        this.link = news.getLink();
+        this.content = news.getContent();
     }
 
 }
