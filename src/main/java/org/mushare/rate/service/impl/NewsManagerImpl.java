@@ -19,14 +19,14 @@ public class NewsManagerImpl extends ManagerTemplate implements NewsManager {
         news.setTitle(title);
         news.setSource(source);
         news.setContent(content);
-        news.setPubDate(System.currentTimeMillis() / 1000L);
+        news.setPubtime(System.currentTimeMillis() / 1000L);
         return newsDao.save(news);
     }
 
     public List<NewsBean> getNews(String keyword) {
         List<NewsBean> newses = new ArrayList<NewsBean>();
         for (News news: newsDao.findByKeyword(keyword)) {
-            newses.add(new NewsBean(news));
+
         }
         return newses;
     }

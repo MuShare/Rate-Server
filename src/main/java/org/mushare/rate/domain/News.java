@@ -21,10 +21,16 @@ public class News implements Serializable {
     private String source;
 
     @Column(nullable = false)
-    private Long pubDate;
+    private Long pubtime;
 
     @Column
     private String link;
+
+    @Column
+    private String lan;
+
+    @Column
+    private String cover;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -53,12 +59,12 @@ public class News implements Serializable {
         this.source = source;
     }
 
-    public long getPubDate() {
-        return pubDate;
+    public Long getPubtime() {
+        return pubtime;
     }
 
-    public void setPubDate(long pubDate) {
-        this.pubDate = pubDate;
+    public void setPubtime(Long pubtime) {
+        this.pubtime = pubtime;
     }
 
     public String getLink() {
@@ -69,6 +75,22 @@ public class News implements Serializable {
         this.link = link;
     }
 
+    public String getLan() {
+        return lan;
+    }
+
+    public void setLan(String lan) {
+        this.lan = lan;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public String getContent() {
         return content;
     }
@@ -76,5 +98,4 @@ public class News implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-
 }

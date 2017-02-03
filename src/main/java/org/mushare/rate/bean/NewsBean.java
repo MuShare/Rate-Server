@@ -7,8 +7,10 @@ public class NewsBean {
     private String nid;
     private String title;
     private String source;
-    private long pubDate;
+    private long pubtime;
     private String link;
+    private String lan;
+    private String cover;
     private String content;
 
     public String getNid() {
@@ -35,12 +37,12 @@ public class NewsBean {
         this.source = source;
     }
 
-    public long getPubDate() {
-        return pubDate;
+    public long getPubtime() {
+        return pubtime;
     }
 
-    public void setPubDate(long pubDate) {
-        this.pubDate = pubDate;
+    public void setPubtime(long pubtime) {
+        this.pubtime = pubtime;
     }
 
     public String getLink() {
@@ -51,6 +53,22 @@ public class NewsBean {
         this.link = link;
     }
 
+    public String getLan() {
+        return lan;
+    }
+
+    public void setLan(String lan) {
+        this.lan = lan;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public String getContent() {
         return content;
     }
@@ -58,14 +76,4 @@ public class NewsBean {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public NewsBean(News news) {
-        this.nid = news.getNid();
-        this.title = news.getTitle();
-        this.source = news.getSource();
-        this.pubDate = news.getPubDate();
-        this.link = news.getLink();
-        this.content = news.getContent();
-    }
-
 }
