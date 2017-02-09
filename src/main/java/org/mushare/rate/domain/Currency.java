@@ -3,10 +3,11 @@ package org.mushare.rate.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "rate_currency")
-public class Currency {
+public class Currency implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

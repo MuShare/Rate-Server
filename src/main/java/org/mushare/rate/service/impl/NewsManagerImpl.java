@@ -1,14 +1,11 @@
 package org.mushare.rate.service.impl;
 
-import org.mushare.common.util.HttpTool;
 import org.mushare.rate.bean.NewsBean;
 import org.mushare.rate.domain.News;
 import org.mushare.rate.service.NewsManager;
 import org.mushare.rate.service.util.ManagerTemplate;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
