@@ -2,10 +2,8 @@ package org.mushare.rate.controller.util;
 
 public enum ErrorCode {
     ErrorToken(901, "Token is wrong."),
+    RevisionIllegal(1011, "Revision parameter illegal");
 
-    ErrorEmailExist(1011, "This email has been registered."),
-    ErrorEmailNotExist(1021, "This email is not exsit."),
-    ErrorPasswordWrong(1022, "Password is wrong.");
 
     public int code;
     public String message;
