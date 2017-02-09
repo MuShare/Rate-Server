@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by lee on 2017/2/3.
  */
 @Entity
-@Table(name = "rate_user")
+@Table(name = "user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
