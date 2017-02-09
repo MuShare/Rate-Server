@@ -1,4 +1,4 @@
-package org.mushare.rate.service.util;
+package org.mushare.rate.service.common;
 
 import org.mushare.rate.dao.CurrencyDao;
 import org.mushare.rate.dao.NewsDao;

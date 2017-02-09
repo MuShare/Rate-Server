@@ -1,7 +1,7 @@
 package org.mushare.rate.controller;
 
 import org.mushare.rate.bean.NewsBean;
-import org.mushare.rate.controller.util.ControllerTemplate;
+import org.mushare.rate.controller.common.ControllerTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

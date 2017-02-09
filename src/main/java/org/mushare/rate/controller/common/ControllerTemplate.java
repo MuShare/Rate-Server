@@ -1,4 +1,4 @@
-package org.mushare.rate.controller.util;
+package org.mushare.rate.controller.common;
 
 import org.mushare.rate.service.CurrencyManager;
 import org.mushare.rate.service.NewsManager;

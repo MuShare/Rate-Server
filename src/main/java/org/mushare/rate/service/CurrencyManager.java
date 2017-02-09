@@ -4,9 +4,6 @@ import org.mushare.rate.bean.CurrencyBean;
 
 import java.util.List;
 
-/**
- * Created by lee on 2017/2/3.
- */
 public interface CurrencyManager {
 
     /**
@@ -14,4 +11,5 @@ public interface CurrencyManager {
      * @return
      */
     List<CurrencyBean> getCurrencies(int rev);
+
 }

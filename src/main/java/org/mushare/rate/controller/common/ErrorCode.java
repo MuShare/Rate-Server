@@ -1,4 +1,4 @@
-package org.mushare.rate.controller.util;
+package org.mushare.rate.controller.common;
 
 public enum ErrorCode {
     ErrorToken(901, "Token is wrong."),

@@ -2,20 +2,11 @@ package org.mushare.rate.bean;
 
 import org.mushare.rate.domain.Currency;
 
-/**
- * Created by lee on 2017/2/9.
- */
 public class CurrencyBean {
     private String cid;
     private String code;
     private String icon;
     private String name;
-
-    public CurrencyBean(Currency currency) {
-        this.cid = currency.getCid();
-        this.code = currency.getCode();
-        this.icon =
-    }
 
     public String getCid() {
         return cid;
@@ -48,4 +39,13 @@ public class CurrencyBean {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CurrencyBean(Currency currency) {
+        this.cid = currency.getCid();
+        this.code = currency.getCode();
+        // TODO: Finish this constructer.
+        this.icon = null;
+        this.name = null;
+    }
+
 }

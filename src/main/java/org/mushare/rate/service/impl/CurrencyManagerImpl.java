@@ -3,7 +3,7 @@ package org.mushare.rate.service.impl;
 import org.mushare.rate.bean.CurrencyBean;
 import org.mushare.rate.domain.Currency;
 import org.mushare.rate.service.CurrencyManager;
-import org.mushare.rate.service.util.ManagerTemplate;
+import org.mushare.rate.service.common.ManagerTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
