@@ -19,4 +19,22 @@ public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyMana
         }
         return currencyBeans;
     }
+
+    public boolean addCurrency(String code) {
+        Currency base = currencyDao.getByCode(BaseCurrencyCode);
+        if (base == null) {
+            base = new Currency();
+            base.setCode(BaseCurrencyCode);
+            base.setRevision(0);
+            currencyDao.save(base);
+        }
+        Currency currency = new Currency();
+        currency.setCode(code);
+        currency.setRevision(currencyDao.getMaxRev());
+        if (currencyDao.save(currency) == null) {
+            return false;
+        }
+
+        return true;
+    }
 }

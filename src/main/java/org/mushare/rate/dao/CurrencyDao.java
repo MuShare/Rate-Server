@@ -16,4 +16,18 @@ public interface CurrencyDao extends CrudDao<Currency> {
      * @return
      */
     List<Currency> findByRevison(int rev);
+
+    /**
+     *
+     * @param code
+     * @return
+     */
+    Currency getByCode(String code);
+
+    /**
+     *
+     * @return
+     */
+    int getMaxRev();
+
 }
