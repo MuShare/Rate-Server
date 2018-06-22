@@ -3,7 +3,7 @@ package org.mushare.common.hibernate.support;
 import java.io.Serializable;
 import java.util.List;
 
-public interface CrudDao<T extends Serializable> {
+public interface BaseDao<T extends Serializable> {
 
     /**
      * Get an entity by physical id.

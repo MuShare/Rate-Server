@@ -10,7 +10,11 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:component-scan base-package="org.mushare.rate.component"/>
+    <context:component-scan base-package="org.mushare.rate.dao"/>
+    <context:component-scan base-package="org.mushare.rate.service"/>
     <context:property-placeholder location="WEB-INF/hibernate.properties"/>
+    <import resource="dwr.xml"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${driverClassName}"></property>

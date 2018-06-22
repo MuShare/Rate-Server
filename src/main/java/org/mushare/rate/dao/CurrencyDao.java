@@ -1,6 +1,6 @@
 package org.mushare.rate.dao;
 
-import org.mushare.common.hibernate.support.CrudDao;
+import org.mushare.common.hibernate.support.BaseDao;
 import org.mushare.rate.domain.Currency;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by lee on 2017/2/3.
  */
-public interface CurrencyDao extends CrudDao<Currency> {
+public interface CurrencyDao extends BaseDao<Currency> {
 
     /**
      * Get all the currency by revision
@@ -23,6 +23,12 @@ public interface CurrencyDao extends CrudDao<Currency> {
      * @return
      */
     Currency getByCode(String code);
+
+    /**
+     *
+     * @return
+     */
+    int getCount();
 
     /**
      *

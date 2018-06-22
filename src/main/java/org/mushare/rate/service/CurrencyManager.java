@@ -1,6 +1,7 @@
 package org.mushare.rate.service;
 
 import org.mushare.rate.bean.CurrencyBean;
+import org.mushare.rate.service.common.Result;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public interface CurrencyManager {
      * @param code
      * @return
      */
-    boolean addCurrency(String code);
+    Result addCurrency(String code);
 
 }

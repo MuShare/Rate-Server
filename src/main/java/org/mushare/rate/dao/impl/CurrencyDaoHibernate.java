@@ -3,7 +3,7 @@ package org.mushare.rate.dao.impl;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.mushare.common.hibernate.support.PageHibernateDaoSupport;
+import org.mushare.common.hibernate.support.BaseHibernateDaoSupport;
 import org.mushare.rate.dao.CurrencyDao;
 import org.mushare.rate.domain.Currency;
 import org.springframework.orm.hibernate4.HibernateCallback;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CurrencyDaoHibernate extends PageHibernateDaoSupport<Currency> implements CurrencyDao {
+public class CurrencyDaoHibernate extends BaseHibernateDaoSupport<Currency> implements CurrencyDao {
 
     public CurrencyDaoHibernate() {
         super();
@@ -33,8 +33,18 @@ public class CurrencyDaoHibernate extends PageHibernateDaoSupport<Currency> impl
         return currencies.get(0);
     }
 
+    public int getCount() {
+        final String hql = "select count(*) from Currency";
+        return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
+            public Integer doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(hql);
+                return (Integer) query.uniqueResult();
+            }
+        });
+    }
+
     public int getMaxRev() {
-        final String hql = "select max(rev) from Currency";
+        final String hql = "select max(revision) from Currency";
         return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
             public Integer doInHibernate(Session session) throws HibernateException {
                 Query query = session.createQuery(hql);

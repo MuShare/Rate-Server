@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api/currencies")
 public class CurrencyController extends ControllerTemplate {
 
-    public void addCurrency(@RequestParam String code) {
-
-    }
-
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity getCurrencies(String cid,
                                         @RequestParam(defaultValue = "en") String lan,

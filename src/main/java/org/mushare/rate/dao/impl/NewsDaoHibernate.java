@@ -1,6 +1,6 @@
 package org.mushare.rate.dao.impl;
 
-import org.mushare.common.hibernate.support.PageHibernateDaoSupport;
+import org.mushare.common.hibernate.support.BaseHibernateDaoSupport;
 import org.mushare.rate.dao.NewsDao;
 import org.mushare.rate.domain.News;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class NewsDaoHibernate extends PageHibernateDaoSupport<News> implements NewsDao {
+public class NewsDaoHibernate extends BaseHibernateDaoSupport<News> implements NewsDao {
 
     public NewsDaoHibernate() {
         super();

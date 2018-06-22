@@ -1,15 +1,19 @@
 package org.mushare.rate.service.impl;
 
+import org.directwebremoting.annotations.RemoteMethod;
+import org.directwebremoting.annotations.RemoteProxy;
 import org.mushare.rate.bean.CurrencyBean;
 import org.mushare.rate.domain.Currency;
 import org.mushare.rate.service.CurrencyManager;
 import org.mushare.rate.service.common.ManagerTemplate;
+import org.mushare.rate.service.common.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RemoteProxy(name = "CurrencyManager")
 public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyManager {
 
     public List<CurrencyBean> getCurrencies(int rev) {
@@ -20,7 +24,8 @@ public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyMana
         return currencyBeans;
     }
 
-    public boolean addCurrency(String code) {
+    @RemoteMethod
+    public Result addCurrency(String code) {
         Currency base = currencyDao.getByCode(BaseCurrencyCode);
         if (base == null) {
             base = new Currency();
@@ -28,13 +33,17 @@ public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyMana
             base.setRevision(0);
             currencyDao.save(base);
         }
-        Currency currency = new Currency();
-        currency.setCode(code);
-        currency.setRevision(currencyDao.getMaxRev());
-        if (currencyDao.save(currency) == null) {
-            return false;
+        Currency currency = currencyDao.getByCode(code);
+        if (currency != null) {
+            return Result.CurrencyExsited;
         }
-
-        return true;
+        currency = new Currency();
+        currency.setCode(code);
+        currency.setRevision(currencyDao.getMaxRev() + 1);
+        if (currencyDao.save(currency) == null) {
+            return Result.SaveInternalError;
+        }
+        rateComponent.loadHistoryForCurrency(currency);
+        return Result.Success;
     }
 }

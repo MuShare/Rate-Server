@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class PageHibernateDaoSupport<T extends Serializable> extends HibernateDaoSupport implements CrudDao<T> {
+public abstract class BaseHibernateDaoSupport<T extends Serializable> extends HibernateDaoSupport implements BaseDao<T> {
 
     @Autowired
     public void init(SessionFactory sessionFactory) {
