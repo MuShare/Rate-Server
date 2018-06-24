@@ -22,11 +22,6 @@ public class RateComponent {
     @Autowired
     private RateDao rateDao;
 
-    public static final String ApiSurpporttedCurrency[] = {"EUR", "GBP", "AUD", "BRL", "CAD", "CHF", "CNY", "DKK", "HKD", "INR", "JPY", "KRW", "LKR", "MYR"
-            , "NZD", "SGD", "TWD", "ZAR", "THB", "SEK", "NOK", "MXN", "BGN", "CZK", "HUF", "LTL", "LVL", "PLN", "RON", "ISK", "HRK", "RUB",
-            "TRY", "PHP", "COP", "ARS", "CLP", "SVC", "TND", "PYG", "MAD", "JMD", "SAR", "QAR", "HNL", "SYP", "KWD", "BHD", "EGP", "OMR", "NGN", "PAB", "PEN", "UYU"};
-
-
     /**
      * 查询当前时刻汇率
      *

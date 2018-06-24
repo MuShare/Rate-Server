@@ -1,24 +1,53 @@
 package org.mushare.rate.service.common;
 
-public enum Result {
+import org.directwebremoting.annotations.DataTransferObject;
 
-    Success(901),
-    SessionError(902),
-    ObjectIdError(903),
-    SaveInternalError(904),
+@DataTransferObject
+public class Result {
 
-    CurrencyExsited(1001);
+    private ResultCode code;
+    private Object data = null;
 
-    public int code;
-    public Object object;
+    public ResultCode getCode() {
+        return code;
+    }
 
-    private Result(int code) {
+    public void setCode(ResultCode code) {
         this.code = code;
     }
 
-    private Result(int code, Object object) {
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public boolean isSuccess() {
+        return code == ResultCode.Success;
+    }
+
+    public Result(ResultCode code, Object data) {
         this.code = code;
-        this.object = object;
+        this.data = data;
+    }
+
+    public static Result withCode(ResultCode code) {
+        return new Result(code, null);
+    }
+
+    public static Result successWithData(Object data) {
+        return new Result(ResultCode.Success, data);
+    }
+
+    public static Result success() {
+        return new Result(ResultCode.Success,null);
+    }
+
+    public static Result saveInternalError() {
+        return withCode(ResultCode.SaveInternalError);
     }
 
 }
+

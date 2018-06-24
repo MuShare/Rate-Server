@@ -2,10 +2,12 @@ package org.mushare.rate.bean;
 
 import org.mushare.rate.domain.Currency;
 
+import java.util.Locale;
+
 public class CurrencyBean {
+
     private String cid;
     private String code;
-    private String icon;
     private String name;
 
     public String getCid() {
@@ -24,14 +26,6 @@ public class CurrencyBean {
         this.code = code;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public String getName() {
         return name;
     }
@@ -40,12 +34,10 @@ public class CurrencyBean {
         this.name = name;
     }
 
-    public CurrencyBean(Currency currency) {
+    public CurrencyBean(Currency currency, String lan) {
         this.cid = currency.getCid();
         this.code = currency.getCode();
-        // TODO: Finish this constructer.
-        this.icon = null;
-        this.name = null;
+        this.name = java.util.Currency.getInstance(currency.getCode()).getDisplayName(Locale.forLanguageTag(lan));
     }
 
 }

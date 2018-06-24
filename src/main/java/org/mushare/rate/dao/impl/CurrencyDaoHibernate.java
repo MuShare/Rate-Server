@@ -20,7 +20,7 @@ public class CurrencyDaoHibernate extends BaseHibernateDaoSupport<Currency> impl
     }
 
     public List<Currency> findByRevison(int revision) {
-        String hql = "from Currency where revision > ?";
+        String hql = "from Currency where revision >= ?";
         return (List<Currency>) getHibernateTemplate().find(hql, revision);
     }
 
