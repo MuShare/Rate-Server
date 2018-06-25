@@ -2,6 +2,7 @@ package org.mushare.rate.controller.common;
 
 import org.mushare.rate.service.CurrencyManager;
 import org.mushare.rate.service.NewsManager;
+import org.mushare.rate.service.RateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +10,13 @@ import org.springframework.http.ResponseEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by lee on 2017/2/3.
- */
 public class ControllerTemplate {
 
     @Autowired
     protected CurrencyManager currencyManager;
+
+    @Autowired
+    protected RateManager rateManager;
 
     @Autowired
     protected NewsManager newsManager;

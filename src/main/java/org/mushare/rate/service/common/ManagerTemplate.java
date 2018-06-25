@@ -3,6 +3,7 @@ package org.mushare.rate.service.common;
 import org.mushare.rate.component.RateComponent;
 import org.mushare.rate.dao.CurrencyDao;
 import org.mushare.rate.dao.NewsDao;
+import org.mushare.rate.dao.RateDao;
 import org.mushare.rate.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +17,9 @@ public class ManagerTemplate {
 
     @Autowired
     protected CurrencyDao currencyDao;
+
+    @Autowired
+    protected RateDao rateDao;
 
     @Autowired
     protected UserDao userDao;

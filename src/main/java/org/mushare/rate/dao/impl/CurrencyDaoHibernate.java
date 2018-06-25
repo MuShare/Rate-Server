@@ -35,12 +35,12 @@ public class CurrencyDaoHibernate extends BaseHibernateDaoSupport<Currency> impl
 
     public int getCount() {
         final String hql = "select count(*) from Currency";
-        return getHibernateTemplate().execute(new HibernateCallback<Integer>() {
-            public Integer doInHibernate(Session session) throws HibernateException {
+        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) throws HibernateException {
                 Query query = session.createQuery(hql);
-                return (Integer) query.uniqueResult();
+                return (Long) query.uniqueResult();
             }
-        });
+        }).intValue();
     }
 
     public int getMaxRev() {

@@ -49,5 +49,9 @@ public class Result {
         return withCode(ResultCode.SaveInternalError);
     }
 
+    public static Result objectIdError() {
+        return withCode(ResultCode.ObjectIdError);
+    }
+
 }
 

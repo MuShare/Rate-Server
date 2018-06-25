@@ -8,7 +8,9 @@ public enum ResultCode {
     SaveInternalError(904),
 
     CurrencyNotSupported(1001),
-    CurrencyExsited(1002);
+    CurrencyExsited(1002),
+
+    CurrencyNotFound(1003);
 
     public int code;
 

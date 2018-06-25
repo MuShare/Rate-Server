@@ -1,11 +1,16 @@
 package org.mushare.rate.component;
 
 import org.mushare.common.util.DateTool;
+import org.mushare.common.util.HttpTool;
+import org.mushare.rate.dao.CurrencyDao;
 import org.mushare.rate.dao.RateDao;
 import org.mushare.rate.domain.Currency;
 import org.mushare.rate.domain.Rate;
 import org.mushare.rate.service.CurrencyManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -22,6 +27,18 @@ public class RateComponent {
     @Autowired
     private RateDao rateDao;
 
+    @Autowired
+    private CurrencyDao currencyDao;
+
+    private int currenciesCount = 0;
+
+    public int getCurrenciesCount() {
+        if (currenciesCount == 0) {
+            currenciesCount = currencyDao.getCount();
+        }
+        return currenciesCount;
+    }
+
     /**
      * 查询当前时刻汇率
      *
@@ -29,7 +46,7 @@ public class RateComponent {
      * @param toCurrency   原币
      * @return 汇率值
      */
-    public double exchage(String fromCurrency, String toCurrency) {
+    private double exchage(String fromCurrency, String toCurrency) {
         String urlStr = "http://api.aoikujira.com/kawase/get.php?format=csv&code=" + fromCurrency + "&to=" + toCurrency;
         URL url = null;
         BufferedReader in = null;
@@ -44,10 +61,40 @@ public class RateComponent {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return Double.valueOf(str[1]);
     }
 
-    public static final String historyURL = "http://fx.sauder.ubc.ca/cgi/fxdata";
+    private static final int FixedRate = 1000 * 60 * 10;
+
+    public Rate refreshCurrency(Currency currency) {
+        double value = exchage(CurrencyManager.BaseCurrencyCode, currency.getCode());
+        Rate rate = rateDao.getCurrentByCurrency(currency);
+        if (rate == null) {
+            rate = new Rate();
+            rate.setDate(DateTool.getToday().getTime());
+            rate.setCurrency(currency);
+            rate.setValue(value);
+            rateDao.save(rate);
+        } else {
+            if (rate.getValue() != value) {
+                rate.setValue(value);
+                rateDao.update(rate);
+            }
+        }
+        return rate;
+    }
+
+    @Scheduled(fixedRate = FixedRate)
+    public void refreshCurrent() {
+        System.out.println("Rates is refreshing at " + new Date());
+        for (Currency currency: currencyDao.findAll()) {
+            Rate rate = refreshCurrency(currency);
+            System.out.println("1 USD = " + rate.getValue() + " " + currency.getCode());
+        }
+    }
+
+    private static final String historyURL = "http://fx.sauder.ubc.ca/cgi/fxdata";
 
     /**
      * 查询指定时间的汇率历史记录，最大支持4年的时间段

@@ -35,6 +35,16 @@ public class DateTool {
     //一年中每个月的天数
     public static int[] MonthDay = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    public static Date getToday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
     /**
      * 得到截止日期xxxx-xx-xx xx:xx相对1969-12-01 00:00的分钟数
      *

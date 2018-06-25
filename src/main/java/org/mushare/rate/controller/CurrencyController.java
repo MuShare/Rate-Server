@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/currencies/list")
+@RequestMapping("/api/currencies")
 public class CurrencyController extends ControllerTemplate {
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity getCurrencies(@RequestParam(defaultValue = "en") String lan,
                                         @RequestParam(defaultValue = "0") final int rev) {
         final Result result = currencyManager.getCurrencies(rev, lan);
