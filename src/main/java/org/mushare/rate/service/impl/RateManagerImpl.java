@@ -61,7 +61,6 @@ public class RateManagerImpl extends ManagerTemplate implements RateManager {
             if (rate.getCurrency().getCid().equals(fromCid)) {
                 continue;
             }
-            System.out.println(rate.getCurrency().getCid() + ", " + rate.getValue() / fromRate.getValue());
             results.put(rate.getCurrency().getCid(), rate.getValue() / fromRate.getValue());
         }
         return Result.successWithData(results);
@@ -93,7 +92,6 @@ public class RateManagerImpl extends ManagerTemplate implements RateManager {
             if (rate.getCurrency().getCid().equals(toCid)) {
                 continue;
             }
-
             results.put(rate.getCurrency().getCid(), toRate.getValue() / rate.getValue());
         }
         return Result.successWithData(results);

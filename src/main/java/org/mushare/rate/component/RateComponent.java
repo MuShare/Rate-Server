@@ -32,9 +32,13 @@ public class RateComponent {
 
     private int currenciesCount = 0;
 
+    public void refreshCurrenciesCount() {
+        currenciesCount = currencyDao.getCount();
+    }
+
     public int getCurrenciesCount() {
         if (currenciesCount == 0) {
-            currenciesCount = currencyDao.getCount();
+            refreshCurrenciesCount();
         }
         return currenciesCount;
     }

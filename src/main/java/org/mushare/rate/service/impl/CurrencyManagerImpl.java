@@ -52,4 +52,26 @@ public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyMana
         return Result.success();
     }
 
+    @RemoteMethod
+    public Result addAll() {
+        if (rateComponent.getCurrenciesCount() < CurrencyManager.ApiSurpporttedCurrency.length) {
+            List<String> codes = new ArrayList<String >(Arrays.asList(CurrencyManager.ApiSurpporttedCurrency));
+            for (Currency currency : currencyDao.findAll()) {
+                codes.remove(currency.getCode());
+            }
+            for (String code : codes) {
+                Result result = addCurrency(code);
+                System.out.println("Add new currency " + code + ", success = " + result.isSuccess());
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            rateComponent.refreshCurrenciesCount();
+            return Result.successWithData(codes.size());
+        }
+        return Result.successWithData(0);
+    }
+
 }
