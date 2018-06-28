@@ -1,0 +1,18 @@
+{
+  "global": {
+    "languages": "en/zh/ja",
+    "httpProtocol": "http",
+    "domain": "localhost:8080",
+    "validity": 600,
+    "resetTitles": "Reset your password/重置密码/パスワード再設定"
+  },
+  "mail": {
+    "sender": "test@mushare.cn",
+    "smtp": "smtp.ym.163.com",
+    "username": "test@mushare.cn",
+    "password": "test_account"
+  },
+  "facebook": {
+    "appId": ""
+  }
+}

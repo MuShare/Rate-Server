@@ -3,11 +3,12 @@ package org.mushare.rate.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "subscribe")
-public class Subscribe {
+@Table(name = "rate_subscribe")
+public class Subscribe implements Serializable {
 
     @Id
     @GeneratedValue(generator = "system-uuid")

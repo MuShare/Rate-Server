@@ -40,4 +40,9 @@ public class CurrencyBean {
         this.name = java.util.Currency.getInstance(currency.getCode()).getDisplayName(Locale.forLanguageTag(lan));
     }
 
+    public CurrencyBean(Currency currency) {
+        this.cid = currency.getCid();
+        this.code = currency.getCode();
+    }
+
 }

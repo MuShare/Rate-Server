@@ -9,8 +9,14 @@ public enum ResultCode {
 
     CurrencyNotSupported(1001),
     CurrencyExsited(1002),
+    CurrencyNotFound(1003),
 
-    CurrencyNotFound(1003);
+    UserEmailRegistered(3001),
+    CategoryRemoveNotAllow(3002),
+    SelectionRemoveNotAllow(3003),
+    OptionRemoveNotAllow(3004),
+    MessageModifyNoPrevilege(3006),
+    FavoriteNotExisted(3007);
 
     public int code;
 

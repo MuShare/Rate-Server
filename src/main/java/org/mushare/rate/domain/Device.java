@@ -7,47 +7,40 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "device")
+@Table(name = "rate_device")
 public class Device implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "did", unique = true)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     private String did;
 
-    @Column(name="last_login_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLoginTime;
+    @Column(nullable = false)
+    private Long createAt;
 
-    // The physical id of the device.
-    @Column(name="device_uuid")
-    private String deviceId;
+    @Column(nullable = false)
+    private Long updateAt;
 
-    @Column(name="device_type")
-    private String deviceType;
+    @Column(nullable = false, unique = true)
+    private String identifier;
 
-    // This token is for user auth.
-    @Column(name="login_token")
-    private String loginToken;
+    @Column(nullable = false)
+    private String token;
 
-    // This token is for remote notification.
-    @Column(name="device_token")
+    @Column
     private String deviceToken;
 
-    @Column(name="last_login_ip")
-    private String lastLoginIp;
+    @Column(nullable = false)
+    private String ip;
 
-    @Column(name="os_version")
-    private String osVersion;
+    @Column(nullable = false)
+    private String os;
 
-    // Enable notification in this device.
-    @Column(name="notify")
-    private Boolean isNotify = true;
-
-    // Local language in this device
     @Column
-    private String lan = "en";
+    private String version;
+
+    @Column
+    private String lan;
 
     @ManyToOne
     @JoinColumn(name = "uid")
@@ -61,36 +54,36 @@ public class Device implements Serializable {
         this.did = did;
     }
 
-    public Date getLastLoginTime() {
-        return lastLoginTime;
+    public Long getCreateAt() {
+        return createAt;
     }
 
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+    public void setCreateAt(Long createAt) {
+        this.createAt = createAt;
     }
 
-    public String getDeviceId() {
-        return deviceId;
+    public Long getUpdateAt() {
+        return updateAt;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public void setUpdateAt(Long updateAt) {
+        this.updateAt = updateAt;
     }
 
-    public String getDeviceType() {
-        return deviceType;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setDeviceType(String deviceType) {
-        this.deviceType = deviceType;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
-    public String getLoginToken() {
-        return loginToken;
+    public String getToken() {
+        return token;
     }
 
-    public void setLoginToken(String loginToken) {
-        this.loginToken = loginToken;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getDeviceToken() {
@@ -101,28 +94,28 @@ public class Device implements Serializable {
         this.deviceToken = deviceToken;
     }
 
-    public String getLastLoginIp() {
-        return lastLoginIp;
+    public String getIp() {
+        return ip;
     }
 
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
-    public String getOsVersion() {
-        return osVersion;
+    public String getOs() {
+        return os;
     }
 
-    public void setOsVersion(String osVersion) {
-        this.osVersion = osVersion;
+    public void setOs(String os) {
+        this.os = os;
     }
 
-    public Boolean getNotify() {
-        return isNotify;
+    public String getVersion() {
+        return version;
     }
 
-    public void setNotify(Boolean notify) {
-        isNotify = notify;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getLan() {
@@ -140,4 +133,5 @@ public class Device implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

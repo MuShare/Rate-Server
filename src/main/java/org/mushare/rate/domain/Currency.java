@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "currency")
+@Table(name = "rate_currency")
 public class Currency implements Serializable {
 
     @Id

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "favorite")
+@Table(name = "rate_favorite")
 public class Favorite implements Serializable {
 
     @Id

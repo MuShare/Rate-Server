@@ -1,16 +1,21 @@
 package org.mushare.rate.service.common;
 
+import org.mushare.rate.component.ConfigComponent;
+import org.mushare.rate.component.MailComponent;
 import org.mushare.rate.component.RateComponent;
-import org.mushare.rate.dao.CurrencyDao;
-import org.mushare.rate.dao.NewsDao;
-import org.mushare.rate.dao.RateDao;
-import org.mushare.rate.dao.UserDao;
+import org.mushare.rate.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ManagerTemplate {
 
     @Autowired
     protected RateComponent rateComponent;
+
+    @Autowired
+    protected ConfigComponent configComponent;
+
+    @Autowired
+    protected MailComponent mailComponent;
 
     @Autowired
     protected NewsDao newsDao;
@@ -23,6 +28,18 @@ public class ManagerTemplate {
 
     @Autowired
     protected UserDao userDao;
+
+    @Autowired
+    protected DeviceDao deviceDao;
+
+    @Autowired
+    private FavoriteDao favoriteDao;
+
+    @Autowired
+    protected SubscribeDao subscribeDao;
+
+    @Autowired
+    protected VerificationDao verificationDao;
 
     public UserDao getUserDao() {
         return userDao;
