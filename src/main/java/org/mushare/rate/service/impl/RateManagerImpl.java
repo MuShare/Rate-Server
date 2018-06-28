@@ -9,6 +9,7 @@ import org.mushare.rate.service.common.Result;
 import org.mushare.rate.service.common.ResultCode;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +96,31 @@ public class RateManagerImpl extends ManagerTemplate implements RateManager {
             results.put(rate.getCurrency().getCid(), toRate.getValue() / rate.getValue());
         }
         return Result.successWithData(results);
+    }
+
+    public Result getHistory(long start, long end, String fromCid, String toCid) {
+        Currency from = currencyDao.get(fromCid);
+        Currency to = currencyDao.get(toCid);
+        if (from == null || to == null) {
+            Debug.error("Cannot find currency by the cid.");
+            return Result.objectIdError();
+        }
+        Map<Long, Double> toRates = new HashMap<Long, Double>();
+        for (Rate rate : rateDao.findByCurrency(to, start, end)) {
+            toRates.put(rate.getDate(), rate.getValue());
+        }
+        List<Double> data = new ArrayList<Double>();
+        for (Rate rate : rateDao.findByCurrency(from, start, end)) {
+            if (!toRates.containsKey(rate.getDate())) {
+                if (data.size() == 0) {
+                    continue;
+                }
+                data.add(data.get(data.size() - 1));
+                continue;
+            }
+            data.add(toRates.get(rate.getDate()) / rate.getValue());
+        }
+        return Result.successWithData(data);
     }
 
 }

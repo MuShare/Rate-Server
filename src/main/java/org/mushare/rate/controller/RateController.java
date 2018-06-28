@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class RateController extends ControllerTemplate {
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
-    public ResponseEntity getCurrentRates(String from, String to, @RequestParam(defaultValue = "false") boolean favorite, HttpServletRequest request) {
+    public ResponseEntity getCurrentRates(String from, String to) {
         if (from != null && to != null) {
             final Result result = rateManager.getCurrent(from, to);
             if (result.getCode() == ResultCode.ObjectIdError) {
@@ -54,4 +54,16 @@ public class RateController extends ControllerTemplate {
         }
         return generateBadRequest(ErrorCode.FromAndToAreNull);
     }
+
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    public ResponseEntity getHistoryRates(long start, long end, String from, String to) {
+        final Result result = rateManager.getHistory(start, end, from, to);
+        if (!result.isSuccess()) {
+            return generateBadRequest(ErrorCode.ObjectIdError);
+        }
+        return generateOK(new HashMap<String, Object>(){{
+            put("data", result.getData());
+        }});
+    }
+
 }

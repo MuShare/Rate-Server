@@ -33,5 +33,9 @@ public class RateDaoHibernate extends BaseHibernateDaoSupport<Rate> implements R
         return rates.get(0);
     }
 
+    public List<Rate> findByCurrency(Currency currency, Long start, Long end) {
+        String hql = "from Rate where currency = ? and date >= ? and date <= ?";
+        return (List<Rate>) getHibernateTemplate().find(hql, currency, start, end);
+    }
 
 }

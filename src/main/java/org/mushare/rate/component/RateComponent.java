@@ -10,6 +10,7 @@ import org.mushare.rate.service.CurrencyManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ import java.net.URLConnection;
 import java.util.*;
 
 @Component
+@EnableScheduling
 public class RateComponent {
 
     @Autowired
@@ -69,7 +71,7 @@ public class RateComponent {
         return Double.valueOf(str[1]);
     }
 
-    private static final int FixedRate = 1000 * 60 * 10;
+    private static final int FixedRate = 1000 * 60 * 60;
 
     public Rate refreshCurrency(Currency currency) {
         double value = exchage(CurrencyManager.BaseCurrencyCode, currency.getCode());
