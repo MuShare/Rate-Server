@@ -63,7 +63,7 @@ public class CurrencyManagerImpl extends ManagerTemplate implements CurrencyMana
                 Result result = addCurrency(code);
                 System.out.println("Add new currency " + code + ", success = " + result.isSuccess());
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

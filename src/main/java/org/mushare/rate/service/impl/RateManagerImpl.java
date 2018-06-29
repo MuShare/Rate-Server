@@ -3,6 +3,7 @@ package org.mushare.rate.service.impl;
 import org.mushare.common.util.Debug;
 import org.mushare.rate.domain.Currency;
 import org.mushare.rate.domain.Rate;
+import org.mushare.rate.service.CurrencyManager;
 import org.mushare.rate.service.RateManager;
 import org.mushare.rate.service.common.ManagerTemplate;
 import org.mushare.rate.service.common.Result;
@@ -105,20 +106,31 @@ public class RateManagerImpl extends ManagerTemplate implements RateManager {
             Debug.error("Cannot find currency by the cid.");
             return Result.objectIdError();
         }
-        Map<Long, Double> toRates = new HashMap<Long, Double>();
-        for (Rate rate : rateDao.findByCurrency(to, start, end)) {
-            toRates.put(rate.getDate(), rate.getValue());
-        }
         List<Double> data = new ArrayList<Double>();
-        for (Rate rate : rateDao.findByCurrency(from, start, end)) {
-            if (!toRates.containsKey(rate.getDate())) {
-                if (data.size() == 0) {
+        if (from.getCode().equals(CurrencyManager.BaseCurrencyCode)) {
+            for (Rate rate : rateDao.findByCurrency(to, start, end)) {
+                data.add(rate.getValue());
+            }
+        } else if (to.getCode().equals(CurrencyManager.BaseCurrencyCode)) {
+            for (Rate rate : rateDao.findByCurrency(from, start, end)) {
+                data.add(1 / rate.getValue());
+            }
+        } else {
+            Map<Long, Double> toRates = new HashMap<Long, Double>();
+            for (Rate rate : rateDao.findByCurrency(to, start, end)) {
+                toRates.put(rate.getDate(), rate.getValue());
+            }
+
+            for (Rate rate : rateDao.findByCurrency(from, start, end)) {
+                if (!toRates.containsKey(rate.getDate())) {
+                    if (data.size() == 0) {
+                        continue;
+                    }
+                    data.add(data.get(data.size() - 1));
                     continue;
                 }
-                data.add(data.get(data.size() - 1));
-                continue;
+                data.add(toRates.get(rate.getDate()) / rate.getValue());
             }
-            data.add(toRates.get(rate.getDate()) / rate.getValue());
         }
         return Result.successWithData(data);
     }
