@@ -14,7 +14,7 @@ RUN rm -rf src
 COPY src src
 RUN mvn clean package -Dmaven.test.skip=true
 
-FROM tomcat:9
+FROM tomcat:8
 
 # Change timezone.
 RUN ln -fs /usr/share/zoneinfo/Hongkong /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
